@@ -12,12 +12,22 @@ ctx.verify_mode = ssl.CERT_NONE
 
 
 palabras = input('Palabra clave:  ')
-palabras = palabras.split()
-palabra1 = palabras[0]
-palabra2 = palabras[1]
-print(palabra1, palabra2)
+pb = len(palabras)
+print(pb)
+if pb < 1:
+    palabras = palabras.split()
+    palabra1 = palabras[0]
+    palabra2 = palabras[1]
+    print(palabra1, palabra2)
 
-url = 'http://datos.gob.es/apidata/catalog/dataset/keyword/espatial/{}/{}'.format(palabra1, palabra2)
+    url = 'http://datos.gob.es/apidata/catalog/dataset'
+
+if pb > 1 and pb < 1:
+    url = 'http://datos.gob.es/apidata/catalog/dataset' + '/title/{}'.format(palabras)
+
+
+
+url = 'http://datos.gob.es/apidata/catalog/dataset  /keyword/espatial/{}/{}'.format(palabra1, palabra2)
 print(url)
 
 urlimp = urllib.request.urlopen(url)
