@@ -1,0 +1,29 @@
+Obtener todos los conjuntos de datos	                    https://datos.gob.es/apidata/catalog/dataset
+
+Obtener un conjunto de datos por su identificador URI	    https://datos.gob.es/apidata/catalog/dataset/{id}
+
+Obtener conjuntos de datos con un determinado título	    https://datos.gob.es/apidata/catalog/dataset/title/{title}
+Por ejemplo, si {title} tiene el valor: 'empleo'
+
+Obtener los conjunto de datos de un determinado
+publicador a través de su identificador                 	https://datos.gob.es/apidata/catalog/dataset/publisher/{id}
+Por ejemplo, si {id} tiene el valor: 'A16003011'
+
+Obtener los conjuntos de datos de una determinada
+categoría o temática a través de su identificador	        https://datos.gob.es/apidata/catalog/dataset/theme/{id}
+Por ejemplo, si {id} tiene el valor: 'hacienda'
+
+Obtener los conjuntos de datos que tiene distribuciones
+en undeterminado formato	                                https://datos.gob.es/apidata/catalog/dataset/format/{format}
+Por ejemplo, si {format} tiene el valor: 'csv'
+
+Obtener los conjuntos de datos que contienen una
+determinada etiqueta	                                    https://datos.gob.es/apidata/catalog/dataset/keyword/{keyword}
+Si {keyword} tiene el valor: 'gastos'
+
+Obtener los conjuntos de datos que pertenecen un
+determinado ámbito geográfico	                            https://datos.gob.es/apidata/catalog/dataset/spatial/{spatialWord1}/{spatialWord2}
+En esta llamada se utilizan dos parámetros:
+{spatialWord1} y {spatialWord2}.
+Si {spatialWord1} tiene el valor: 'Autonomia' y
+{spatialWord2} tiene el valor: 'Pais-Vasco'

@@ -11,10 +11,16 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 
-palabra = input('Palabra clave:  ')
-print(palabra)
+palabras = input('Palabra clave:  ')
+palabras = palabras.split()
+palabra1 = palabras[0]
+palabra2 = palabras[1]
+print(palabra1, palabra2)
 
-urlimp = urllib.request.urlopen('http://datos.gob.es/apidata/catalog/dataset'+ palabra)#.read().decode()
+url = 'http://datos.gob.es/apidata/catalog/dataset/keyword/espatial/{}/{}'.format(palabra1, palabra2)
+print(url)
+
+urlimp = urllib.request.urlopen(url)
 
 
 print('URL     :', urlimp.geturl())
