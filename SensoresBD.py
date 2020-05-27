@@ -46,12 +46,16 @@ for formatos in js['result']['items']:
     print(json.dumps(formatos, indent=4))
 print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6666')
 distri = js['result']['items']
+
 for popa in distri:
     abo = popa['distribution']
+
     for pope in abo:
-        print(popa)
-        format = pope['format']
+        print('pope', json.dumps(pope, indent=4))
         accessU = pope['accessURL']
+        format = pope['format']
+
         for popi in format:
-            descrip = popi['value']
-            print(descrip)
+            if popi['value'] == 'application/vnd.geo+json':
+                #accessU = pope['accessURL']
+                print(accessU)
