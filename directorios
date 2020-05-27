@@ -27,3 +27,15 @@ En esta llamada se utilizan dos parámetros:
 {spatialWord1} y {spatialWord2}.
 Si {spatialWord1} tiene el valor: 'Autonomia' y
 {spatialWord2} tiene el valor: 'Pais-Vasco'
+
+Valores Extraccion Metadatos:
+
+<!-- Snippet package/snippets/dge_export_links.html start -->
+
+<ul class="export-dataset">
+  <li class="export-datase-xml"><a href="http://datos.gob.es/apidata/catalog/dataset/l01061535-sensores-de-eesystem.xml" target="_blank" title="Exportar metadatos en formato XML. Abre una ventana nueva"><img src="/images/PNG/export-dts-xml.png" alt="Exportar metadatos en formato XML. Abre una ventana nueva"></a></li>
+  <li class="export-datase-json"><a href="http://datos.gob.es/apidata/catalog/dataset/l01061535-sensores-de-eesystem.json" target="_blank" title="Exportar metadatos en formato JSON. Abre una ventana nueva"><img src="/images/PNG/export-dts-json.png" alt="Exportar metadatos en formato JSON. Abre una ventana nueva"></a></li>
+  <li class="export-datase-csv"><a href="http://datos.gob.es/apidata/catalog/dataset/l01061535-sensores-de-eesystem.csv" target="_blank" title="Exportar metadatos en formato CSV. Abre una ventana nueva"><img src="/images/PNG/export-dts-csv.png" alt="Exportar metadatos en formato CSV. Abre una ventana nueva"></a></li>
+  <li class="export-datase-ttl"><a href="http://datos.gob.es/apidata/catalog/dataset/l01061535-sensores-de-eesystem.ttl" target="_blank" title="Exportar metadatos en formato TURTLE. Abre una ventana nueva"><img src="/images/PNG/export-dts-ttl.png" alt="Exportar metadatos en formato TURTLE. Abre una ventana nueva"></a></li>
+  <li class="export-datase-rdf"><a href="http://datos.gob.es/apidata/catalog/dataset/l01061535-sensores-de-eesystem.rdf" target="_blank" title="Exportar metadatos en formato RDF. Abre una ventana nueva"><img src="/images/PNG/export-dts-rdf.png" alt="Exportar metadatos en formato RDF. Abre una ventana nueva"></a></li>
+</ul>
