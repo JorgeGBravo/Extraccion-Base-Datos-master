@@ -48,13 +48,27 @@ for popa in distri:
     abo = popa['distribution']
 
     for pope in abo:
-        print('pope', json.dumps(pope, indent=4))
+        #print('pope', json.dumps(pope, indent=4))
+        titulo = pope['title']
         accessU = pope['accessURL']
         format = pope['format']
+        value = format['value']
 
-        for popi in format:
-            print('++++++++++++++++++++++++++++++++')
-            print('popi', json.dumps(popi, indent=4))
-            print('++++++++++++++++++++++++++++++++')
-            print(popi['value'])                            #en este punto no me muestra value,  necesito value para confirmar formato
+        #print('++++++++++++++++++++++++++++++++++++')
+        #print(value)
+        #print(accessU)
+        #print('++++++++++++++++++++++++++++++++++++')
 
+        if value == 'application/vnd.geo+json':
+            print('******************************')
+            print(titulo)
+            print(accessU)
+
+       # if value == 'application/ld+json':                 #enlaces json descarga
+       #     print(titulo)
+       #     print(accessU)
+
+        if value == 'application/json':
+            print(titulo)
+            print(accessU)
+            print('******************************')
