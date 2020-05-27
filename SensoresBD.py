@@ -38,14 +38,11 @@ except:
 
 #print(json.dumps(js, indent=4))
 
-print('*******************************************************')
-
 
 for formatos in js['result']['items']:
-    print('items:')
-    print(json.dumps(formatos, indent=4))
-print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6666')
-distri = js['result']['items']
+    #print('items:')
+    #print(json.dumps(formatos, indent=4))
+    distri = js['result']['items']
 
 for popa in distri:
     abo = popa['distribution']
@@ -56,6 +53,8 @@ for popa in distri:
         format = pope['format']
 
         for popi in format:
-            if popi['value'] == 'application/vnd.geo+json':
-                #accessU = pope['accessURL']
-                print(accessU)
+            print('++++++++++++++++++++++++++++++++')
+            print('popi', json.dumps(popi, indent=4))
+            print('++++++++++++++++++++++++++++++++')
+            print(popi['value'])                            #en este punto no me muestra value,  necesito value para confirmar formato
+
