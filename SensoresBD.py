@@ -37,7 +37,7 @@ except:
     js = None
 
 #print(json.dumps(js, indent=4))
-
+lista = list()
 
 for formatos in js['result']['items']:
     #print('items:')
@@ -54,21 +54,18 @@ for popa in distri:
         format = pope['format']
         value = format['value']
 
-        #print('++++++++++++++++++++++++++++++++++++')
-        #print(value)
-        #print(accessU)
-        #print('++++++++++++++++++++++++++++++++++++')
-
-        if value == 'application/vnd.geo+json':
-            print('******************************')
-            print(titulo)
+        if value == 'application/vnd.geo+json' not in lista:
             print(accessU)
+            urlgj = urllib.request.urlopen(accessU).read().decode()
+            print('****************************************************')
+            print(json.dumps(urlgj , indent=4))
+            print('****************************************************')
 
-       # if value == 'application/ld+json':                 #enlaces json descarga
-       #     print(titulo)
-       #     print(accessU)
-
-        if value == 'application/json':
-            print(titulo)
+        if value == 'application/json' not in lista:
             print(accessU)
-            print('******************************')
+            urlj = urllib.request.urlopen(accessU).read().decode()
+            print('****************************************************')
+            print(json.dumps(urlj , indent=4))
+            print('****************************************************')
+
+        # print(lista)
