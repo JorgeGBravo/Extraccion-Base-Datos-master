@@ -1,0 +1,41 @@
+Sensores Parking Superficie - Zona Azul- Santander
+
+cur.execute ('''CREATE TABLE pkazulsantder
+                    (id INTERGER PRIMARY KEY UNIQUE AUTOINCREMENT
+                    type TEXT, identifier INTERGER, status INTERGER,
+                    modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
+                    uri TEXT,''')
+
+Sensores Medioambientales
+
+cur.execute ('''CREATE TABLE smedioambientalsantder
+                    (id INTERGER PRIMARY KEY UNIQUE AUTOINCREMENT
+                    type TEXT, identifier INTERGER, noise FLOAT, temperature FLOAT,
+                    light FLOAT, battery FLOAT, modified TIMESTAMP, latitude FLOAT,
+                    longitude FLOAT, uri TEXT,''')
+
+Sensores de Riego
+
+cur.execute ('''CREATE TABLE irrigacion
+                    (id INTERGER PRIMARY KEY UNIQUE AUTOINCREMENT
+                    type TEXT, identifier INTERGER, soilmoisturetension FLOAT,
+                    temperature FLOAT, winddirection FLOAT, rainfall FLOAT, radiationpar FLOAT,
+                    solarradiation FLOAT, windspeed FLOAT, groudtemperature FLOAT, atmosphericpreassure FLOAT,
+                    relativehumidity FLOAT, battery FLOAT, modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
+                    uri TEXT, ''')
+
+Sensores Moviles Medioambientales - Santander -
+
+cur.execute ('''CREATE TABLE movambientalsantder
+                    (id INTERGER PRIMARY KEY UNIQUE AUTOINCREMENT
+                    type TEXT, identifier INTERGER, particles FLOAT, NO2 FLOAT, temperature FLOAT,
+                    altitude FLOAT, speed FLOAT, CO FLOAT, odometer FLOAT, course FLOAT, ozone FLOAT,
+                    modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
+                    uri TEXT, ''')
+
+Sensores Parking - Villanueva de la Serena - Badajoz -
+
+cur.execute ('''CREATE TABLE parkingvillser
+                    (id INTERGER PRIMARY KEY UNIQUE AUTOINCREMENT
+                    nombre_parking TEXT, num_plaza INTERGER, codigo_estado INTERGER, tipo_plaza TEXT,
+                    latitude FLOAT, longitude FLOAT''')

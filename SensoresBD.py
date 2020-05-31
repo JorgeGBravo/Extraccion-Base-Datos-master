@@ -55,6 +55,7 @@ for popa in distri:
         value = format['value']
 
         if value == 'application/vnd.geo+json' not in lista:
+            print(titulo)
             print(accessU)
             urlgj = urllib.request.urlopen(accessU).read().decode()
             print('****************************************************')
@@ -62,6 +63,7 @@ for popa in distri:
             print('****************************************************')
 
         if value == 'application/json' not in lista:
+            print(titulo)
             print(accessU)
             urlj = urllib.request.urlopen(accessU).read().decode()
             print('****************************************************')
