@@ -113,7 +113,7 @@ for popa in distri:
                     prop = i['properties']
 
                     for g in geo:
-                        coor = geo['coordinates']
+                        # coor = geo['coordinates']
                         lat = geo['coordinates'][1]
                         long = geo['coordinates'][0]
 
@@ -122,6 +122,7 @@ for popa in distri:
                         cod_estado = prop['cod_estado']
                         estado = prop['estado']
                         tipo_plaza = prop['tipo_plaza']
+                        nombre = prop['nombre_parking']
 
         # =========================================Sensores Eficiencia Energetica - EESystem-====================================
         # if titulo == 'Sensores de EESystem':
