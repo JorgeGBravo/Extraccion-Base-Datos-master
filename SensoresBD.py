@@ -92,7 +92,7 @@ for popa in distri:
         value = format['value']
 
         if value == 'application/vnd.geo+json':
-
+# ===================================================Sensores Parking Coventual Villanueva de la Serena==================
             if titulo == 'Sensores del parking':
                 print(titulo)
                 print(accessU)
@@ -122,35 +122,136 @@ for popa in distri:
                         cod_estado = prop['cod_estado']
                         estado = prop['estado']
                         tipo_plaza = prop['tipo_plaza']
-                        print(tipo_plaza)
 
-            if titulo == 'Sensores de EESystem':
-                print(titulo)
-                print(accessU)
-                urlsee = urllib.request.urlopen(accessU).read().decode()
-                print(json.dumps(urlsee , indent=4))
+        # =========================================Sensores Eficiencia Energetica - EESystem-====================================
+        # if titulo == 'Sensores de EESystem':
+        # print(titulo)
+        # print(accessU)
+        # urlsee = urllib.request.urlopen(accessU)
+        # print(json.dumps(urlsee , indent=4))
+
+        # datasee = urlsee.read().decode()
+
+        # print(json.dumps(datasee , indent=4))
+
+        # try:
+        #    js = json.loads(str(datasee))
+        # except:
+        #    js = None
+        # =========================================Sensores Medioambientales -Santander-=========================================
 
         if value == 'application/json':
             if titulo == 'Sensores ambientales':
                 print(titulo)
                 print(accessU)
-                urlsa = urllib.request.urlopen(accessU).read().decode()
-                print(json.dumps(urlsa , indent=4))
+                urlsa = urllib.request.urlopen(accessU)
+                datasa = urlsa.read().decode()
+                # print(json.dumps(datasa , indent=4))
+                try:
+                    js = json.loads(str(datasa))
+                except:
+                    js = None
+
+                resources = js['resources']
+
+                for r in resources:
+                    type = r['ayto:type']
+                    identifier = r['dc:identifier']
+                    noise = r['ayto:noise']
+                    temperature = r['ayto:temperature']
+                    light = r['ayto:light']
+                    battery = r['ayto:battery']
+                    time = r['dc:modified']
+                    lat = r['ayto:latitude']
+                    long = r['ayto:longitude']
+                    uri = r['uri']
+
+            # ====================================================Sensores Zona Azul -Santander-=====================================
 
             if titulo == 'Sensores Parking de Superficie':
                 print(titulo)
                 print(accessU)
-                urlsps = urllib.request.urlopen(accessU).read().decode()
-                print(json.dumps(urlsps , indent=4))
+                urlsps = urllib.request.urlopen(accessU)
+                # print(json.dumps(urlsps , indent=4))
+                datasps = urlsps.read().decode()
+                # print(json.dumps(datasa , indent=4))
+                try:
+                    js = json.loads(str(datasps))
+                except:
+                    js = None
+
+                resources = js['resources']
+
+                for r in resources:
+                    type = r['ayto:type']
+                    identifier = r['dc:identifier']
+                    status = r['ayto:status']
+                    time = r['dc:modified']
+                    lat = r['ayto:latitude']
+                    long = r['ayto:longitude']
+                    uri = r['uri']
+
+            # =================================================Sensores de Riego -Santander-=========================================
 
             if titulo == 'Sensores de riego':
                 print(titulo)
                 print(accessU)
-                urlsr = urllib.request.urlopen(accessU).read().decode()
-                print(json.dumps(urlsr , indent=4))
+                urlsr = urllib.request.urlopen(accessU)
+                datasr = urlsr.read().decode()
+                # print(json.dumps(datasa , indent=4))
+                try:
+                    js = json.loads(str(datasr))
+                except:
+                    js = None
 
+                resources = js['resources']
+
+                for r in resources:
+                    type = r['ayto:type']
+                    identifier = r['dc:identifier']
+                    soilmosturet = r['ayto:soilMoistureTension']
+                    temperature = r['ayto:temperature']
+                    winddirection = r['ayto:windDirection']
+                    rainfall = r['ayto:rainfall']
+                    radiationpar = r['ayto:radiationPAR']
+                    solarradiation = r['ayto:solarRadiation']
+                    windspeed = r['ayto:windSpeed']
+                    groundtemp = r['ayto:groundTemperature']
+                    atmpress = r['ayto:atmosphericPressure']
+                    relathumid = r['ayto:relativeHumidity']
+                    battery = r['ayto:battery']
+                    time = r['dc:modified']
+                    lat = r['ayto:latitude']
+                    long = r['ayto:longitude']
+                    uri = r['uri']
+            # =================================================Sensores Moviles Medioambientales -Santander-=========================
             if titulo == 'Sensores móviles':
                 print(titulo)
                 print(accessU)
-                urlsm = urllib.request.urlopen(accessU).read().decode()
-                print(json.dumps(urlsm , indent=4))
+                urlsmm = urllib.request.urlopen(accessU)
+                datasmm = urlsmm.read().decode()
+                # print(json.dumps(datasa , indent=4))
+                try:
+                    js = json.loads(str(datasmm))
+                except:
+                    js = None
+
+                resources = js['resources']
+
+                for r in resources:
+                    type = r['ayto:type']
+                    identifier = r['dc:identifier']
+                    particles = r['ayto:particles']
+                    no2 = r['ayto:particles']
+                    temperature = r['ayto:temperature']
+                    altitude = r['ayto:altitude']
+                    speed = r['ayto:speed']
+                    co = r['ayto:CO']
+                    odometer = r['ayto:odometer']
+                    course = r['ayto:course']
+                    ozone = r['ayto:ozone']
+                    time = r['dc:modified']
+                    lat = r['ayto:latitude']
+                    long = r['ayto:longitude']
+                    uri = r['uri']
+                    print(uri)
