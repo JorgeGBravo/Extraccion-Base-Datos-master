@@ -58,7 +58,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS movambientalsantder
 
 cur.execute('''CREATE TABLE IF NOT EXISTS parkingvillser
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nombre_parking TEXT UNIQUE, num_plaza INTERGER UNIQUE, codigo_estado INTERGER, tipo_plaza TEXT,
+                    nombre_parking TEXT , num_plaza INTERGER, codigo_estado INTERGER, tipo_plaza TEXT,
                     latitude FLOAT, longitude FLOAT)''')
 
 print('URL     :' , urlimp.geturl())
@@ -100,7 +100,7 @@ for popa in distri:
 
                 datasp = urlsp.read().decode()
 
-                print(json.dumps(datasp , indent=4))
+                # print(json.dumps(datasp , indent=4))
 
                 try:
                     js = json.loads(str(datasp))
@@ -123,6 +123,11 @@ for popa in distri:
                         estado = prop['estado']
                         tipo_plaza = prop['tipo_plaza']
                         nombre = prop['nombre_parking']
+
+                    cur.execute('''INSERT INTO parkingvillser 
+                                (nombre_parking, num_plaza, codigo_estado, tipo_plaza, latitude, longitude)
+                                VALUES (?, ?, ?, ?, ?, ?)''' ,
+                                (nombre , num_plaza , cod_estado , tipo_plaza , lat , long))
 
         # =========================================Sensores Eficiencia Energetica - EESystem-====================================
         # if titulo == 'Sensores de EESystem':
@@ -255,4 +260,3 @@ for popa in distri:
                     lat = r['ayto:latitude']
                     long = r['ayto:longitude']
                     uri = r['uri']
-                    print(uri)
