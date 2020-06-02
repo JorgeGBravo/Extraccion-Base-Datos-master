@@ -51,7 +51,7 @@ for i in lista:
         estado = 'libre'
 
     dat = (plaza , estado , tipo , time)
-    print(dat)
+
     data = ','.join(dat)
 
     con2.execute('''INSERT OR REPLACE INTO Locations (address, data)
@@ -60,38 +60,26 @@ for i in lista:
 
     con2.commit()
 
-    # '==================================================================================='
-'''
+conn = sqlite3.connect('geodata.sqlite')  # conectamos base de datos
+cur = conn.cursor()  # variable cursor BD
+print('**************')
+print(lat)
+print('****************')
 cur.execute('SELECT * FROM Locations')  # seleccionamos en locations
-        fhand = codecs.open('where.js' , 'w' , "utf-8")  # variable apertura where.js
-        fhand.write("myData = [\n")  # escribimos datos en where.js
-        count = 0
-        for row in cur:  # en locations
-            data = str(row[1].decode())  # variabl decode posición 1 de row
-            try:
-                js = json.loads(str(data))  # si js carga jsson str tiene data
-            except:
-                continue  # si no no carga data continua
+fhand = codecs.open('where.js' , 'w' , "utf-8")  # variable apertura where.js
+fhand.write("myData = [\n")  # escribimos datos en where.js
 
-            if not ('status' in js and js['status'] == 'OK'): continue
+for i in cur:
+    where = i['data']
+    if not isinstance(i , dict): continue
+    print(where)
 
-            lat = js["results"][0]["geometry"]["location"]["lat"]  # valiables lat y lng de js
-            lng = js["results"][0]["geometry"]["location"]["lng"]
-            if lat == 0 or lng == 0: continue  # si lon y lat es = 0 continua
-            where = js['results'][0]['formatted_address']
-            where = where.replace("'" , "")
-            try:
-                print(where , lat , lng)
-
-                count = count + 1
-                if count > 1: fhand.write(",\n")
-                output = "[" + str(lat) + "," + str(lng) + ", '" + where + "']"
-                fhand.write(output)
-            except:
-                continue
-
-        fhand.write("\n];\n")
-        cur.close()
-        fhand.close()
-        print(count , "records written to where.js")
-        print("Open where.html to view the data in a browser")'''
+if where > len(where):
+    fhand.write(",\n")
+    output = "[" + str(lat) + "," + str(lon) + ", '" + where + "']"
+    fhand.write(output)
+    fhand.write("\n];\n")
+    cur.close()
+    fhand.close()
+    print("records written to where.js")
+    print("Open where.html to view the data in a browser")
