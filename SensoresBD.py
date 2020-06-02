@@ -6,6 +6,7 @@ import ssl
 import random
 import sqlite3
 
+
 # Ignore SSL certificate errors
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
@@ -48,8 +49,8 @@ cur.execute('''CREATE TABLE IF NOT EXISTS irrigacion
 # Sensores Moviles Medioambientales - Santander -
 
 cur.execute('''CREATE TABLE IF NOT EXISTS movambientalsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    type TEXT UNIQUE, identifier INTERGER UNIQUE, particles FLOAT, NO2 FLOAT, temperature FLOAT,
+                    (id INTEGER PRIMARY KEY UNIQUE,
+                    type TEXT, identifier INTERGER UNIQUE, particles FLOAT, NO2 FLOAT, temperature FLOAT,
                     altitude FLOAT, speed FLOAT, CO FLOAT, odometer FLOAT, course FLOAT, ozone FLOAT,
                     modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
                     uri TEXT)''')
@@ -58,12 +59,13 @@ cur.execute('''CREATE TABLE IF NOT EXISTS movambientalsantder
 
 cur.execute('''CREATE TABLE IF NOT EXISTS parkingvillser
                     (id INTEGER PRIMARY KEY UNIQUE,
-                    nombre_parking TEXT, num_plaza INTERGER UNIQUE, codigo_estado INTERGER, tipo_plaza TEXT,
+                    nombre_parking TEXT, num_plaza INTERGER UNIQUE, codigo_estado INTERGER, tipo_plaza TEXT, time TIMESTAMP,
                     latitude FLOAT, longitude FLOAT)''')
 
 print('URL     :' , urlimp.geturl())
 
 headers = urlimp.info()
+date = headers['date']
 print('DATE    :' , headers['date'])
 print('HEADERS :')
 print('---------')
@@ -127,9 +129,9 @@ for popa in distri:
                         nombre = prop['nombre_parking']
 
                     cur.execute('''INSERT OR REPLACE INTO parkingvillser
-                                (id, nombre_parking, num_plaza, codigo_estado, tipo_plaza, latitude, longitude)
-                                VALUES (?, ?, ?, ?, ?, ?, ?)''' ,
-                                (num_plaza , nombre , num_plaza , cod_estado , tipo_plaza , lat , long))
+                                (id, nombre_parking, num_plaza, codigo_estado, tipo_plaza, time, latitude, longitude)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''' ,
+                                (num_plaza , nombre , num_plaza , cod_estado , tipo_plaza , date , lat , long))
                 comm.commit()
 
         # =========================================Sensores Eficiencia Energetica - EESystem-====================================
@@ -281,7 +283,7 @@ for popa in distri:
                     type = r['ayto:type']
                     identifier = r['dc:identifier']
                     particles = r['ayto:particles']
-                    no2 = r['ayto:particles']
+                    no2 = r['ayto:NO2']
                     temperature = r['ayto:temperature']
                     altitude = r['ayto:altitude']
                     speed = r['ayto:speed']
@@ -293,3 +295,12 @@ for popa in distri:
                     lat = r['ayto:latitude']
                     long = r['ayto:longitude']
                     uri = r['uri']
+
+                    cur.execute('''INSERT OR REPLACE INTO movambientalsantder
+                                (id, type, identifier, particles, NO2, temperature, altitude, speed,
+                                CO, odometer, course, ozone, modified, latitude, longitude, uri)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''' ,
+                                (identifier , type , identifier , particles , no2 , temperature , altitude ,
+                                 speed , co , odometer , course , ozone , time , lat , long , uri))
+
+                comm.commit()
