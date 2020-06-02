@@ -22,7 +22,7 @@ cur = comm.cursor()
 # Sensores Parking Superficie - Zona Azul- Santander
 
 cur.execute('''CREATE TABLE IF NOT EXISTS pkazulsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, 
                     type TEXT UNIQUE, identifier INTERGER UNIQUE, status INTERGER,
                     modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
                     uri TEXT)''')
@@ -30,7 +30,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS pkazulsantder
 # Sensores Medioambientales
 
 cur.execute('''CREATE TABLE IF NOT EXISTS smedioambientalsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
                     type TEXT UNIQUE, identifier INTERGER UNIQUE, noise FLOAT, temperature FLOAT,
                     light FLOAT, battery FLOAT, modified TIMESTAMP, latitude FLOAT,
                     longitude FLOAT, uri TEXT)''')
@@ -38,7 +38,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS smedioambientalsantder
 # Sensores de Riego
 
 cur.execute('''CREATE TABLE IF NOT EXISTS irrigacion
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
                     type TEXT UNIQUE, identifier INTERGER UNIQUE, soilmoisturetension FLOAT,
                     temperature FLOAT, winddirection FLOAT, rainfall FLOAT, radiationpar FLOAT,
                     solarradiation FLOAT, windspeed FLOAT, groudtemperature FLOAT, atmosphericpreassure FLOAT,
@@ -48,7 +48,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS irrigacion
 # Sensores Moviles Medioambientales - Santander -
 
 cur.execute('''CREATE TABLE IF NOT EXISTS movambientalsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
                     type TEXT UNIQUE, identifier INTERGER UNIQUE, particles FLOAT, NO2 FLOAT, temperature FLOAT,
                     altitude FLOAT, speed FLOAT, CO FLOAT, odometer FLOAT, course FLOAT, ozone FLOAT,
                     modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
@@ -57,8 +57,8 @@ cur.execute('''CREATE TABLE IF NOT EXISTS movambientalsantder
 # Sensores Parking - Villanueva de la Serena - Badajoz -
 
 cur.execute('''CREATE TABLE IF NOT EXISTS parkingvillser
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nombre_parking TEXT , num_plaza INTERGER, codigo_estado INTERGER, tipo_plaza TEXT,
+                    (id INTEGER PRIMARY KEY UNIQUE,
+                    nombre_parking TEXT, num_plaza INTERGER UNIQUE, codigo_estado INTERGER, tipo_plaza TEXT,
                     latitude FLOAT, longitude FLOAT)''')
 
 print('URL     :' , urlimp.geturl())
@@ -86,13 +86,15 @@ for popa in distri:
     abo = popa['distribution']
 
     for pope in abo:
+        if not isinstance(pope , dict): continue
+
         titulo = pope['title']
         accessU = pope['accessURL']
         format = pope['format']
         value = format['value']
 
         if value == 'application/vnd.geo+json':
-# ===================================================Sensores Parking Coventual Villanueva de la Serena==================
+            # ===================================================Sensores Parking Coventual Villanueva de la Serena==================
             if titulo == 'Sensores del parking':
                 print(titulo)
                 print(accessU)
@@ -124,10 +126,15 @@ for popa in distri:
                         tipo_plaza = prop['tipo_plaza']
                         nombre = prop['nombre_parking']
 
-                    cur.execute('''INSERT INTO parkingvillser 
-                                (nombre_parking, num_plaza, codigo_estado, tipo_plaza, latitude, longitude)
-                                VALUES (?, ?, ?, ?, ?, ?)''' ,
-                                (nombre , num_plaza , cod_estado , tipo_plaza , lat , long))
+                    cur.execute('''INSERT OR REPLACE INTO parkingvillser
+                                (id, nombre_parking, num_plaza, codigo_estado, tipo_plaza, latitude, longitude)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)''' ,
+                                (num_plaza , nombre , num_plaza , cod_estado , tipo_plaza , lat , long))
+                comm.commit()
+                print('***************************')
+                print(long)
+                print(nombre)
+                print('***************************')
 
         # =========================================Sensores Eficiencia Energetica - EESystem-====================================
         # if titulo == 'Sensores de EESystem':
