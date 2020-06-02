@@ -258,12 +258,10 @@ for popa in distri:
                                 solarradiation, windspeed, groudtemperature, atmosphericpreassure,
                                 relativehumidity, battery, modified, latitude, longitude, uri)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''' ,
-                                (
-                                    identifier , type , identifier , soilmosturet , temperature , winddirection ,
-                                    rainfall ,
-                                    radiationpar , solarradiation , windspeed , groundtemp , atmpress , relathumid ,
-                                    battery , time ,
-                                    lat , long , uri))
+                                (identifier , type , identifier , soilmosturet , temperature , winddirection ,
+                                 rainfall , radiationpar , solarradiation , windspeed , groundtemp , atmpress ,
+                                 relathumid ,
+                                 battery , time , lat , long , uri))
 
                     comm.commit()
 
