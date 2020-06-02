@@ -96,7 +96,7 @@ for popa in distri:
         value = format['value']
 
         if value == 'application/vnd.geo+json':
-            # ===================================================Sensores Parking Coventual Villanueva de la Serena==================
+# ===================================================Sensores Parking Coventual Villanueva de la Serena==================
             if titulo == 'Sensores del parking':
                 print(titulo)
                 print(accessU)
@@ -218,7 +218,7 @@ for popa in distri:
                                 (identifier , type , identifier , status , time , lat , long , uri))
                 comm.commit()
 
-            # =================================================Sensores de Riego -Santander-=========================================
+            #=================================================Sensores de Riego -Santander-=========================================
 
             if titulo == 'Sensores de riego':
                 print(titulo)
@@ -259,12 +259,14 @@ for popa in distri:
                                 relativehumidity, battery, modified, latitude, longitude, uri)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''' ,
                                 (
-                                identifier , type , identifier , soilmosturet , temperature , winddirection , rainfall ,
-                                radiationpar , solarradiation , windspeed , groundtemp , atmpress , relathumid ,
-                                battery , time ,
-                                lat , long , uri))
+                                    identifier , type , identifier , soilmosturet , temperature , winddirection ,
+                                    rainfall ,
+                                    radiationpar , solarradiation , windspeed , groundtemp , atmpress , relathumid ,
+                                    battery , time ,
+                                    lat , long , uri))
 
                     comm.commit()
+
             # =================================================Sensores Moviles Medioambientales -Santander-=========================
             if titulo == 'Sensores móviles':
                 print(titulo)
