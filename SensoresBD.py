@@ -38,8 +38,8 @@ cur.execute('''CREATE TABLE IF NOT EXISTS smedioambientalsantder
 # Sensores de Riego
 
 cur.execute('''CREATE TABLE IF NOT EXISTS irrigacion
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    type TEXT UNIQUE, identifier INTERGER UNIQUE, soilmoisturetension FLOAT,
+                    (id INTEGER PRIMARY KEY UNIQUE,
+                    type TEXT, identifier INTERGER UNIQUE, soilmoisturetension FLOAT,
                     temperature FLOAT, winddirection FLOAT, rainfall FLOAT, radiationpar FLOAT,
                     solarradiation FLOAT, windspeed FLOAT, groudtemperature FLOAT, atmosphericpreassure FLOAT,
                     relativehumidity FLOAT, battery FLOAT, modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
@@ -249,6 +249,20 @@ for popa in distri:
                     lat = r['ayto:latitude']
                     long = r['ayto:longitude']
                     uri = r['uri']
+
+                    cur.execute('''INSERT OR REPLACE INTO irrigacion
+                                (id, type, identifier, soilmoisturetension,
+                                temperature, winddirection, rainfall, radiationpar,
+                                solarradiation, windspeed, groudtemperature, atmosphericpreassure,
+                                relativehumidity, battery, modified, latitude, longitude, uri)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''' ,
+                                (
+                                identifier , type , identifier , soilmosturet , temperature , winddirection , rainfall ,
+                                radiationpar , solarradiation , windspeed , groundtemp , atmpress , relathumid ,
+                                battery , time ,
+                                lat , long , uri))
+
+                    comm.commit()
             # =================================================Sensores Moviles Medioambientales -Santander-=========================
             if titulo == 'Sensores móviles':
                 print(titulo)
