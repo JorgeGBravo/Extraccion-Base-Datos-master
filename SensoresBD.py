@@ -30,8 +30,8 @@ cur.execute('''CREATE TABLE IF NOT EXISTS pkazulsantder
 # Sensores Medioambientales
 
 cur.execute('''CREATE TABLE IF NOT EXISTS smedioambientalsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    type TEXT UNIQUE, identifier INTERGER UNIQUE, noise FLOAT, temperature FLOAT,
+                    (id INTEGER PRIMARY KEY UNIQUE,
+                    type TEXT, identifier INTERGER UNIQUE, noise FLOAT, temperature FLOAT,
                     light FLOAT, battery FLOAT, modified TIMESTAMP, latitude FLOAT,
                     longitude FLOAT, uri TEXT)''')
 
@@ -131,10 +131,6 @@ for popa in distri:
                                 VALUES (?, ?, ?, ?, ?, ?, ?)''' ,
                                 (num_plaza , nombre , num_plaza , cod_estado , tipo_plaza , lat , long))
                 comm.commit()
-                print('***************************')
-                print(long)
-                print(nombre)
-                print('***************************')
 
         # =========================================Sensores Eficiencia Energetica - EESystem-====================================
         # if titulo == 'Sensores de EESystem':
@@ -152,6 +148,7 @@ for popa in distri:
         # except:
         #    js = None
         # =========================================Sensores Medioambientales -Santander-=========================================
+
 
         if value == 'application/json':
             if titulo == 'Sensores ambientales':
@@ -178,6 +175,15 @@ for popa in distri:
                     lat = r['ayto:latitude']
                     long = r['ayto:longitude']
                     uri = r['uri']
+
+                    cur.execute('''INSERT OR REPLACE INTO smedioambientalsantder
+                                 (id, type, identifier, noise, temperature, light, battery, modified, latitude,
+                                 longitude, uri)
+                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''' ,
+                                (identifier , type , identifier , noise , temperature , light , battery , time ,
+                                 lat , long , uri))
+
+                    comm.commit()
 
             # ====================================================Sensores Zona Azul -Santander-=====================================
 
