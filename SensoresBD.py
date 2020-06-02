@@ -22,8 +22,8 @@ cur = comm.cursor()
 # Sensores Parking Superficie - Zona Azul- Santander
 
 cur.execute('''CREATE TABLE IF NOT EXISTS pkazulsantder
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, 
-                    type TEXT UNIQUE, identifier INTERGER UNIQUE, status INTERGER,
+                    (id INTEGER PRIMARY KEY UNIQUE, 
+                    type TEXT, identifier INTERGER UNIQUE, status INTERGER,
                     modified TIMESTAMP, latitude FLOAT, longitude FLOAT,
                     uri TEXT)''')
 
@@ -209,6 +209,12 @@ for popa in distri:
                     lat = r['ayto:latitude']
                     long = r['ayto:longitude']
                     uri = r['uri']
+
+                    cur.execute('''INSERT OR REPLACE INTO pkazulsantder
+                                (id, type, identifier, status, modified, latitude, longitude, uri)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''' ,
+                                (identifier , type , identifier , status , time , lat , long , uri))
+                comm.commit()
 
             # =================================================Sensores de Riego -Santander-=========================================
 
