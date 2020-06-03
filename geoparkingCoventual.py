@@ -63,7 +63,7 @@ conn = sqlite3.connect('geodata.sqlite')
 cur = conn.cursor()
 
 cur.execute('SELECT * FROM Locations')
-fhand = codecs.open('where.js' , 'w' , "utf-8")
+fhand = codecs.open('wherecoventual.js' , 'w' , "utf-8")
 fhand.write("myData = [\n")
 lista = list()
 
@@ -83,4 +83,4 @@ fhand.write("\n];\n")
 
 cur.close()
 fhand.close()
-print("Open where.html to view the data in a browser")
+print("Open wherecoventual.html to view the data in a browser")

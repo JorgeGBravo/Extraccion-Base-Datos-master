@@ -81,4 +81,4 @@ fhand.write("\n];\n")
 
 cur.close()
 fhand.close()
-print("Open where.html to view the data in a browser")
+print("Open wherecoventual.html to view the data in a browser")
