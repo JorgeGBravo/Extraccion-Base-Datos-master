@@ -40,15 +40,14 @@ for i in lista:
     lon = str(i[5])
     adr = (lat , lon)
     adress = ','.join(adr)
-
     plaza = str(i[0])
     tipo = i[1]
     st = i[2]
     time = i[3]
     if st == 1:
-        estado = 'ocupado'
+        estado = 'Libre'
     else:
-        estado = 'libre'
+        estado = 'Ocupado'
 
     dat = (plaza , estado , tipo , time)
 
@@ -60,26 +59,28 @@ for i in lista:
 
     con2.commit()
 
-conn = sqlite3.connect('geodata.sqlite')  # conectamos base de datos
-cur = conn.cursor()  # variable cursor BD
-print('**************')
-print(lat)
-print('****************')
-cur.execute('SELECT * FROM Locations')  # seleccionamos en locations
-fhand = codecs.open('where.js' , 'w' , "utf-8")  # variable apertura where.js
-fhand.write("myData = [\n")  # escribimos datos en where.js
+conn = sqlite3.connect('geodata.sqlite')
+cur = conn.cursor()
+
+cur.execute('SELECT * FROM Locations')
+fhand = codecs.open('where.js' , 'w' , "utf-8")
+fhand.write("myData = [\n")
+lista = list()
 
 for i in cur:
-    where = i['data']
-    if not isinstance(i , dict): continue
+    where = i[1]
+    lt = i[0]
     print(where)
+    print(lt)
+    if where > str(0):
+        output = "[" + str(lt) + ", '" + where + "']"
+        lista.append(output)
+        # fhand.write(output)if
 
-if where > len(where):
-    fhand.write(",\n")
-    output = "[" + str(lat) + "," + str(lon) + ", '" + where + "']"
-    fhand.write(output)
-    fhand.write("\n];\n")
-    cur.close()
-    fhand.close()
-    print("records written to where.js")
-    print("Open where.html to view the data in a browser")
+fhand.write(",\n".join(lista))
+
+fhand.write("\n];\n")
+
+cur.close()
+fhand.close()
+print("Open where.html to view the data in a browser")
